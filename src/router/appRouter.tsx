@@ -1,27 +1,9 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { lazy, LazyExoticComponent } from 'react';
-
-const Home = lazy(() => import('../dashboard/pages/Home'));
-
-type JSXElement =
-  | LazyExoticComponent<() => JSX.Element>
-  | (() => JSX.Element)
-  | JSX.Element;
-
-interface AppRoute {
-  path: string;
-  element: JSXElement;
-  children?: AppRoute[];
-  index?: boolean;
-  to?: string;
-}
+import { AppRoute } from '../interface/router.interface';
+import { dashboardRouter } from '../dashboard/router/dashboardRouter';
 
 const routes: AppRoute[] = [
-  {
-    path: '/',
-    index: true,
-    element: <Home />,
-  },
+  ...dashboardRouter,
 ];
 
 export const appRouter = createBrowserRouter(routes as RouteObject[]);
